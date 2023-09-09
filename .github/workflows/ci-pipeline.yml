@@ -1,0 +1,44 @@
+---
+name: CI/CD Pipeline for Project
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - development
+      - main
+      - master
+      - "[0-9]+.[0-9]+.x"
+  pull_request:
+    branches:
+      - development
+      - main
+      - master
+      - "[0-9]+.[0-9]+.x"
+  workflow_dispatch:
+
+# The sequence of runs in this workflow:
+jobs:
+  cpp-formatting:
+    name: clang-format
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - run: lsb_release -a
+      - run: uname -a
+      - name: Check out Repository Code
+        uses: actions/checkout@v3
+      - name: Set Up ClangFormat
+        run: |
+          sudo apt install clang-format
+      - name: Format code with clang-format
+        run : |
+          clang-format -style=file -i $(find . -name "*.c" -o -name "*.h")
+          clang-format -style=file -i $(find . -name "*.cpp" -o -name "*.hpp")
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: ${{ github.actor }}
+          author_email: ${{ github.actor }}@users.noreply.github.com
+          message: 'Code formatting and linting'
+          add: '.'

@@ -15,7 +15,7 @@ typedef struct snake_t {
 
 typedef struct game_state_t {
   unsigned int num_rows;
-  char **board;
+  char** board;
 
   unsigned int num_snakes;
   snake_t* snakes;
@@ -27,7 +27,7 @@ void print_board(game_state_t* state, FILE* fp);
 void save_board(game_state_t* state, char* filename);
 void update_state(game_state_t* state, int (*add_food)(game_state_t* state));
 char get_board_at(game_state_t* state, unsigned int row, unsigned int col);
-game_state_t * initialize_snakes(game_state_t* state);
+game_state_t* initialize_snakes(game_state_t* state);
 game_state_t* load_board(char* filename);
 
 #endif

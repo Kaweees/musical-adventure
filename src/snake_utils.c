@@ -1,7 +1,9 @@
+#include "snake_utils.h"
+
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-#include "snake_utils.h"
+
 #include "state.h"
 
 unsigned int det_rand(unsigned int* state) {
@@ -13,13 +15,13 @@ unsigned int det_rand(unsigned int* state) {
   } else {
     *state = *state >> 1;
   }
-  return* state;
+  return *state;
 }
 
 unsigned int seed = 1;
 
 unsigned int get_num_cols(game_state_t* state, unsigned int row) {
-  unsigned int num_cols = (unsigned int) strlen(state->board[row]);
+  unsigned int num_cols = (unsigned int)strlen(state->board[row]);
   while (num_cols > 0 && state->board[row][num_cols - 1] == '\n') {
     num_cols--;
   }

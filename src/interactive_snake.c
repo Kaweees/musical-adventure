@@ -8,10 +8,12 @@
 #include <termios.h>
 #include <time.h>
 #include <unistd.h>
+
 #include "snake_utils.h"
 #include "state.h"
 
-// This code uses some pretty bad hacks, and should not be used as a "good" reference.
+// This code uses some pretty bad hacks, and should not be used as a "good"
+// reference.
 
 struct timespec game_interval = {1, 0L};
 game_state_t* state = NULL;
@@ -29,8 +31,8 @@ int get_raw_char() {
     perror("Error getting terminal attributes");
   }
   tcflag_t old_lflag = old.c_lflag;
-  old.c_lflag &= (tcflag_t) ~ICANON;
-  old.c_lflag &= (tcflag_t) ~ECHO;
+  old.c_lflag &= (tcflag_t)~ICANON;
+  old.c_lflag &= (tcflag_t)~ECHO;
   old.c_cc[VMIN] = 1;
   old.c_cc[VTIME] = 0;
   if (tcsetattr(STDIN_FILENO, TCSANOW, &old) < 0) {
@@ -43,7 +45,7 @@ int get_raw_char() {
   if (tcsetattr(STDIN_FILENO, TCSADRAIN, &old) < 0) {
     perror("Error re-enabling terminal canonical mode");
   }
-  return (int) (unsigned char) buf;
+  return (int)(unsigned char)buf;
 }
 
 void print_fullscreen_board(game_state_t* state) {
@@ -85,7 +87,7 @@ void* game_loop(void* _) {
 
 void input_loop() {
   while (1) {
-    char key = (char) get_raw_char();
+    char key = (char)get_raw_char();
     pthread_mutex_lock(&state_mutex);
     if (key == '[') {
       if (game_interval.tv_nsec >= 900000000L) {
@@ -98,7 +100,8 @@ void input_loop() {
       if (game_interval.tv_nsec == 0L) {
         game_interval.tv_sec--;
         game_interval.tv_nsec = 900000000L;
-      } else if (game_interval.tv_sec > 0 || game_interval.tv_nsec > 100000000L) {
+      } else if (game_interval.tv_sec > 0 ||
+                 game_interval.tv_nsec > 100000000L) {
         game_interval.tv_nsec -= 100000000L;
       }
     } else {
@@ -123,8 +126,8 @@ int main(int argc, char* argv[]) {
       if (delay == 0.0 && errno != 0) {
         perror("Error parsing delay");
       }
-      game_interval.tv_sec = (time_t) (unsigned int) delay;
-      game_interval.tv_nsec = (long) (delay * 1000000000) % 1000000000L;
+      game_interval.tv_sec = (time_t)(unsigned int)delay;
+      game_interval.tv_nsec = (long)(delay * 1000000000) % 1000000000L;
       i++;
       continue;
     }

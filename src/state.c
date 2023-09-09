@@ -8,7 +8,8 @@
 #include "snake_utils.h"
 
 /* Helper function definitions */
-static void set_board_at(game_state_t* state, unsigned int row, unsigned int col, char ch);
+static void set_board_at(
+    game_state_t* state, unsigned int row, unsigned int col, char ch);
 static bool is_tail(char c);
 static bool is_head(char c);
 static bool is_snake(char c);
@@ -63,7 +64,8 @@ char get_board_at(game_state_t* state, unsigned int row, unsigned int col) {
   Helper function to set a character on the board
   (already implemented for you).
 */
-static void set_board_at(game_state_t* state, unsigned int row, unsigned int col, char ch) {
+static void set_board_at(
+    game_state_t* state, unsigned int row, unsigned int col, char ch) {
   state->board[row][col] = ch;
 }
 
@@ -139,7 +141,8 @@ static unsigned int get_next_col(unsigned int cur_col, char c) {
 /*
   Task 4.2
 
-  Helper function for update_state. Return the character in the cell the snake is moving into.
+  Helper function for update_state. Return the character in the cell the snake
+  is moving into.
 
   This function should not modify anything.
 */
@@ -157,7 +160,8 @@ static char next_square(game_state_t* state, unsigned int snum) {
 
   ...in the snake struct: update the row and col of the head
 
-  Note that this function ignores food, walls, and snake bodies when moving the head.
+  Note that this function ignores food, walls, and snake bodies when moving the
+  head.
 */
 static void update_head(game_state_t* state, unsigned int snum) {
   // TODO: Implement this function.

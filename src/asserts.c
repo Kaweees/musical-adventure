@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+
 #include "state.h"
 
 const unsigned int DEFAULT_BOARD_WIDTH = 20;
@@ -46,7 +47,8 @@ bool assert_false(char* msg, bool actual) {
 */
 bool assert_equals_char(char* msg, char expected, char actual) {
   if (expected != actual) {
-    printf("Assertion error: expected %s to be %c but got %c\n", msg, expected, actual);
+    printf("Assertion error: expected %s to be %c but got %c\n", msg, expected,
+        actual);
     return false;
   } else {
     return true;
@@ -60,7 +62,8 @@ bool assert_equals_char(char* msg, char expected, char actual) {
 */
 bool assert_equals_int(char* msg, int expected, int actual) {
   if (expected != actual) {
-    printf("Assertion error: expected %s to be %d but got %d\n", msg, expected, actual);
+    printf("Assertion error: expected %s to be %d but got %d\n", msg, expected,
+        actual);
     return false;
   } else {
     return true;
@@ -72,9 +75,11 @@ bool assert_equals_int(char* msg, int expected, int actual) {
   Otherwise, will return false with this message:
   "Assertion error: expected (msg) to be (expected) but got (actual)"
 */
-bool assert_equals_unsigned_int(char* msg, unsigned int expected, unsigned int actual) {
+bool assert_equals_unsigned_int(
+    char* msg, unsigned int expected, unsigned int actual) {
   if (expected != actual) {
-    printf("Assertion error: expected %s to be %d but got %d\n", msg, expected, actual);
+    printf("Assertion error: expected %s to be %d but got %d\n", msg, expected,
+        actual);
     return false;
   } else {
     return true;
@@ -88,7 +93,8 @@ bool assert_equals_unsigned_int(char* msg, unsigned int expected, unsigned int a
 */
 bool assert_equals_bool(char* msg, bool expected, bool actual) {
   if (expected != actual) {
-    printf("Assertion error: expected %s to be %s but got %s\n", msg, expected ? "true" : "false", actual ? "true" : "false");
+    printf("Assertion error: expected %s to be %s but got %s\n", msg,
+        expected ? "true" : "false", actual ? "true" : "false");
     return false;
   } else {
     return true;
@@ -104,14 +110,15 @@ bool assert_load_equals(char* filename, char* expected) {
   }
 
   unsigned int expectedLines = 0;
-  unsigned int expectedLen = (unsigned) strlen(expected);
+  unsigned int expectedLen = (unsigned)strlen(expected);
   for (unsigned int i = 0; i < expectedLen; i++) {
     if (expected[i] == '\n') {
       expectedLines++;
     }
   }
 
-  if (!assert_equals_unsigned_int("board height", expectedLines, state->num_rows)) {
+  if (!assert_equals_unsigned_int(
+          "board height", expectedLines, state->num_rows)) {
     return false;
   }
 
@@ -119,9 +126,11 @@ bool assert_load_equals(char* filename, char* expected) {
 
   FILE* f = fopen("unit-test-out.snk", "r");
   fseek(f, 0, SEEK_END);
-  unsigned int f_len = (unsigned int) ftell(f);
+  unsigned int f_len = (unsigned int)ftell(f);
   if (expectedLen != f_len) {
-    printf("%s\n", "Your loaded board doesn't match the expected output. See unit-test-out.snk for what you loaded.");
+    printf("%s\n",
+        "Your loaded board doesn't match the expected output. See "
+        "unit-test-out.snk for what you loaded.");
     fclose(f);
     return false;
   }
@@ -136,7 +145,9 @@ bool assert_load_equals(char* filename, char* expected) {
   fclose(f);
 
   if (strcmp(expected, actual) != 0) {
-    printf("%s\n", "Your loaded board doesn't match the expected output. See unit-test-out.snk for what you loaded.");
+    printf("%s\n",
+        "Your loaded board doesn't match the expected output. See "
+        "unit-test-out.snk for what you loaded.");
     return false;
   }
   free(actual);
@@ -146,10 +157,12 @@ bool assert_load_equals(char* filename, char* expected) {
   return true;
 }
 
-bool assert_map_equals(game_state_t* state, unsigned int row, unsigned int col, char expected) {
+bool assert_map_equals(
+    game_state_t* state, unsigned int row, unsigned int col, char expected) {
   char actual = get_board_at(state, row, col);
   if (expected != actual) {
-    printf("Assertion error: at (row %d, col %d), expected %c but got %c\n", row, col, expected, actual);
+    printf("Assertion error: at (row %d, col %d), expected %c but got %c\n",
+        row, col, expected, actual);
     return false;
   } else {
     return true;
@@ -159,10 +172,13 @@ bool assert_map_equals(game_state_t* state, unsigned int row, unsigned int col, 
 // Note: This function only works for states created from create_default_state.
 bool assert_state_equals(game_state_t* expected, game_state_t* actual) {
   // Check that width and height are equal
-  if (!assert_equals_unsigned_int("board height", expected->num_rows, actual->num_rows)) {
+  if (!assert_equals_unsigned_int(
+          "board height", expected->num_rows, actual->num_rows)) {
     return false;
   }
-  if (!assert_equals_unsigned_int("board width", (unsigned int) strlen(expected->board[0]), (unsigned int) strlen(actual->board[0]))) {
+  if (!assert_equals_unsigned_int("board width",
+          (unsigned int)strlen(expected->board[0]),
+          (unsigned int)strlen(actual->board[0]))) {
     return false;
   }
 
@@ -172,33 +188,41 @@ bool assert_state_equals(game_state_t* expected, game_state_t* actual) {
       char expected_char = get_board_at(expected, row, col);
       char actual_char = get_board_at(actual, row, col);
       if (expected_char != actual_char) {
-        printf("Assertion error: at (row %d, col %d), expected %c but got %c\n", row, col, expected_char, actual_char);
+        printf("Assertion error: at (row %d, col %d), expected %c but got %c\n",
+            row, col, expected_char, actual_char);
         return false;
       }
     }
   }
 
   // Check that num_snakes are equal
-  if (!assert_equals_unsigned_int("number of snakes", expected->num_snakes, actual->num_snakes)) {
+  if (!assert_equals_unsigned_int(
+          "number of snakes", expected->num_snakes, actual->num_snakes)) {
     return false;
   }
 
   // Check that snake coordinates and live are equal
-  // Note: This code checks all snakes, so there may be errors if state->snakes was not allocated correctly.
+  // Note: This code checks all snakes, so there may be errors if state->snakes
+  // was not allocated correctly.
   for (unsigned int i = 0; i < expected->num_snakes; i++) {
-    if (!assert_equals_unsigned_int("row of snake tail", expected->snakes[i].tail_row, actual->snakes[i].tail_row)) {
+    if (!assert_equals_unsigned_int("row of snake tail",
+            expected->snakes[i].tail_row, actual->snakes[i].tail_row)) {
       return false;
     }
-    if (!assert_equals_unsigned_int("col of snake tail", expected->snakes[i].tail_col, actual->snakes[i].tail_col)) {
+    if (!assert_equals_unsigned_int("col of snake tail",
+            expected->snakes[i].tail_col, actual->snakes[i].tail_col)) {
       return false;
     }
-    if (!assert_equals_unsigned_int("row of snake head", expected->snakes[i].head_row, actual->snakes[i].head_row)) {
+    if (!assert_equals_unsigned_int("row of snake head",
+            expected->snakes[i].head_row, actual->snakes[i].head_row)) {
       return false;
     }
-    if (!assert_equals_unsigned_int("col of snake head", expected->snakes[i].head_col, actual->snakes[i].head_col)) {
+    if (!assert_equals_unsigned_int("col of snake head",
+            expected->snakes[i].head_col, actual->snakes[i].head_col)) {
       return false;
     }
-    if (!assert_equals_bool("snake is alive", expected->snakes[i].live, actual->snakes[i].live)) {
+    if (!assert_equals_bool("snake is alive", expected->snakes[i].live,
+            actual->snakes[i].live)) {
       return false;
     }
   }
@@ -212,8 +236,9 @@ bool assert_file_size(char* file, size_t expected_file_size) {
     printf("Assertion error: unable to check file size.\n");
     return false;
   }
-  if (expected_file_size != (size_t) buffer.st_size) {
-    printf("Assertion error: expected file size to be %d but got %d.\n", (int) expected_file_size, (int) buffer.st_size);
+  if (expected_file_size != (size_t)buffer.st_size) {
+    printf("Assertion error: expected file size to be %d but got %d.\n",
+        (int)expected_file_size, (int)buffer.st_size);
     return false;
   }
   return true;

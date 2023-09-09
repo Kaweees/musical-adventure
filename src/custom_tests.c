@@ -9,9 +9,7 @@
 
 /* Look at asserts.c for some helpful assert functions */
 
-int greater_than_forty_two(int x) {
-  return x > 42;
-}
+int greater_than_forty_two(int x) { return x > 42; }
 
 bool is_vowel(char c) {
   char* vowels = "aeiouAEIOU";
@@ -25,8 +23,8 @@ bool is_vowel(char c) {
 
 /*
   Example 1: Returns true if all test cases pass. False otherwise.
-    The function greater_than_forty_two(int x) will return true if x > 42. False otherwise.
-    Note: This test is NOT comprehensive
+    The function greater_than_forty_two(int x) will return true if x > 42. False
+  otherwise. Note: This test is NOT comprehensive
 */
 bool test_greater_than_forty_two() {
   int testcase_1 = 42;
@@ -52,9 +50,8 @@ bool test_greater_than_forty_two() {
 
 /*
   Example 2: Returns true if all test cases pass. False otherwise.
-    The function is_vowel(char c) will return true if c is a vowel (i.e. c is a,e,i,o,u)
-    and returns false otherwise
-    Note: This test is NOT comprehensive
+    The function is_vowel(char c) will return true if c is a vowel (i.e. c is
+  a,e,i,o,u) and returns false otherwise Note: This test is NOT comprehensive
 */
 bool test_is_vowel() {
   char testcase_1 = 'a';

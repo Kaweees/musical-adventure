@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include <stdio.h>
 
 #include "raymath.h"
 #include "rlgl.h"
@@ -11,7 +12,8 @@
 // Program main entry point
 //------------------------------------------------------------------------------------
 int main(int argc, char *argv[]) {
-  ToroidalGrid *grid = createToroidalGrid(10, 10);
+  GameGrid *grid = createGameGrid(10, 10);
+  Snake* snake = createSnake(5, 5, UP);
   const int screenWidth = grid->width * CELL_SIZE;
   const int screenHeight = grid->height * CELL_SIZE;
   int cellWidth = screenWidth / grid->width;
@@ -22,20 +24,15 @@ int main(int argc, char *argv[]) {
   SetTargetFPS(60);  // Set our game to run at 60 frames-per-second
 
   /* Populate the grid with some initial cell states */
-  setToroidalGrid(grid, 0, 1, ALIVE);
+  // setToroidalGrid(grid, 0, 1, ALIVE);
 
   /* Loop until window close button or ESC key is pressed */
   while (!WindowShouldClose()) {
     /* Begin drawing */
     BeginDrawing();
 
-    /* Draw horizontal lines */
-    for (int i = 0; i < grid->width; i++) {
-      for (int j = 0; j < grid->height; j++) {
-        DrawRectangle(i * cellWidth, j * cellHeight, cellWidth, cellHeight,
-            getToroidalGrid(grid, i, j) ? GREEN : BLACK);
-      }
-    }
+    /* Draw background */
+    DrawRectangle(0, 0, cellWidth * grid->height, cellHeight * grid->height, BLACK);
 
     /* Draw horizontal lines */
     for (int i = 1; i < grid->height; ++i) {
@@ -50,12 +47,22 @@ int main(int argc, char *argv[]) {
     /* End drawing */
     EndDrawing();
 
-    /* Update the grid */
-    updateBoard(&grid);
+    // SnakeSegment * temp = snake->head;
+    // while (temp != NULL) {
+    //   // DrawRectangle(temp->x * cellWidth, temp->y * cellHeight, cellWidth, cellHeight, GREEN);
+    //   }
+    //   temp = temp->next;
+    // }
+
+    // /* End drawing */
+    // EndDrawing();
+
+    // /* Update the grid */
+    // moveSnake(snake, grid);
   }
 
   /* Close window and OpenGL context */
   CloseWindow();
-  freeToroidalGrid(grid);
+  freeGameGrid(grid);
   return 0;
 }

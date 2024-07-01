@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/mvillafloran/Documents/GitHub/Projects/musical-adventu
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool..."
-	/opt/homebrew/Cellar/cmake/3.29.6/bin/cpack --config ./CPackConfig.cmake
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && /opt/homebrew/Cellar/cmake/3.29.6/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -78,7 +78,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
-	/opt/homebrew/Cellar/cmake/3.29.6/bin/cpack --config ./CPackSourceConfig.cmake /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/CPackSourceConfig.cmake
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && /opt/homebrew/Cellar/cmake/3.29.6/bin/cpack --config ./CPackSourceConfig.cmake /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -152,14 +152,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/CMakeFiles /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(CMAKE_COMMAND) -E cmake_progress_start /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/CMakeFiles /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/_deps/raylib-build//CMakeFiles/progress.marks
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/raylib-build/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/raylib-build/clean
 .PHONY : clean
 
 # The main clean target
@@ -168,132 +168,33 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/raylib-build/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/raylib-build/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -P /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/CMakeFiles/VerifyGlobs.cmake
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(CMAKE_COMMAND) -P /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/CMakeFiles/VerifyGlobs.cmake
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named life
+# Convenience name for target.
+_deps/raylib-build/CMakeFiles/uninstall.dir/rule:
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 _deps/raylib-build/CMakeFiles/uninstall.dir/rule
+.PHONY : _deps/raylib-build/CMakeFiles/uninstall.dir/rule
 
-# Build rule for target.
-life: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 life
-.PHONY : life
-
-# fast build rule for target.
-life/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/life.dir/build.make CMakeFiles/life.dir/build
-.PHONY : life/fast
-
-#=============================================================================
-# Target rules for targets named uninstall
-
-# Build rule for target.
-uninstall: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uninstall
+# Convenience name for target.
+uninstall: _deps/raylib-build/CMakeFiles/uninstall.dir/rule
 .PHONY : uninstall
 
 # fast build rule for target.
 uninstall/fast:
-	$(MAKE) $(MAKESILENT) -f _deps/raylib-build/CMakeFiles/uninstall.dir/build.make _deps/raylib-build/CMakeFiles/uninstall.dir/build
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(MAKE) $(MAKESILENT) -f _deps/raylib-build/CMakeFiles/uninstall.dir/build.make _deps/raylib-build/CMakeFiles/uninstall.dir/build
 .PHONY : uninstall/fast
-
-#=============================================================================
-# Target rules for targets named raylib
-
-# Build rule for target.
-raylib: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 raylib
-.PHONY : raylib
-
-# fast build rule for target.
-raylib/fast:
-	$(MAKE) $(MAKESILENT) -f _deps/raylib-build/raylib/CMakeFiles/raylib.dir/build.make _deps/raylib-build/raylib/CMakeFiles/raylib.dir/build
-.PHONY : raylib/fast
-
-#=============================================================================
-# Target rules for targets named glfw
-
-# Build rule for target.
-glfw: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 glfw
-.PHONY : glfw
-
-# fast build rule for target.
-glfw/fast:
-	$(MAKE) $(MAKESILENT) -f _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/build.make _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/build
-.PHONY : glfw/fast
-
-#=============================================================================
-# Target rules for targets named update_mappings
-
-# Build rule for target.
-update_mappings: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 update_mappings
-.PHONY : update_mappings
-
-# fast build rule for target.
-update_mappings/fast:
-	$(MAKE) $(MAKESILENT) -f _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build.make _deps/raylib-build/raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build
-.PHONY : update_mappings/fast
-
-src/life.o: src/life.c.o
-.PHONY : src/life.o
-
-# target to build an object file
-src/life.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/life.dir/build.make CMakeFiles/life.dir/src/life.c.o
-.PHONY : src/life.c.o
-
-src/life.i: src/life.c.i
-.PHONY : src/life.i
-
-# target to preprocess a source file
-src/life.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/life.dir/build.make CMakeFiles/life.dir/src/life.c.i
-.PHONY : src/life.c.i
-
-src/life.s: src/life.c.s
-.PHONY : src/life.s
-
-# target to generate assembly for a file
-src/life.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/life.dir/build.make CMakeFiles/life.dir/src/life.c.s
-.PHONY : src/life.c.s
-
-src/main.o: src/main.c.o
-.PHONY : src/main.o
-
-# target to build an object file
-src/main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/life.dir/build.make CMakeFiles/life.dir/src/main.c.o
-.PHONY : src/main.c.o
-
-src/main.i: src/main.c.i
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/life.dir/build.make CMakeFiles/life.dir/src/main.c.i
-.PHONY : src/main.c.i
-
-src/main.s: src/main.c.s
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/life.dir/build.make CMakeFiles/life.dir/src/main.c.s
-.PHONY : src/main.c.s
 
 # Help Target
 help:
@@ -310,16 +211,6 @@ help:
 	@echo "... package_source"
 	@echo "... rebuild_cache"
 	@echo "... uninstall"
-	@echo "... update_mappings"
-	@echo "... glfw"
-	@echo "... life"
-	@echo "... raylib"
-	@echo "... src/life.o"
-	@echo "... src/life.i"
-	@echo "... src/life.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
 .PHONY : help
 
 
@@ -331,7 +222,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -P /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/CMakeFiles/VerifyGlobs.cmake
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(CMAKE_COMMAND) -P /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure/CMakeFiles/VerifyGlobs.cmake
+	cd /Users/mvillafloran/Documents/GitHub/Projects/musical-adventure && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

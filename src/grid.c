@@ -16,6 +16,4 @@ GameGrid *createGameGrid(int width, int height) {
   return grid;
 }
 
-void freeGameGrid(GameGrid *grid) {
-  free(grid);
-}
+void freeGameGrid(GameGrid *grid) { free(grid); }

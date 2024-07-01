@@ -13,7 +13,7 @@
 //------------------------------------------------------------------------------------
 int main(int argc, char *argv[]) {
   GameGrid *grid = createGameGrid(10, 10);
-  Snake* snake = createSnake(5, 5, UP);
+  Snake *snake = createSnake(5, 5, UP);
   const int screenWidth = grid->width * CELL_SIZE;
   const int screenHeight = grid->height * CELL_SIZE;
   int cellWidth = screenWidth / grid->width;
@@ -32,7 +32,8 @@ int main(int argc, char *argv[]) {
     BeginDrawing();
 
     /* Draw background */
-    DrawRectangle(0, 0, cellWidth * grid->height, cellHeight * grid->height, BLACK);
+    DrawRectangle(
+        0, 0, cellWidth * grid->height, cellHeight * grid->height, BLACK);
 
     /* Draw horizontal lines */
     for (int i = 1; i < grid->height; ++i) {
@@ -49,7 +50,8 @@ int main(int argc, char *argv[]) {
 
     // SnakeSegment * temp = snake->head;
     // while (temp != NULL) {
-    //   // DrawRectangle(temp->x * cellWidth, temp->y * cellHeight, cellWidth, cellHeight, GREEN);
+    //   // DrawRectangle(temp->x * cellWidth, temp->y * cellHeight, cellWidth,
+    //   cellHeight, GREEN);
     //   }
     //   temp = temp->next;
     // }

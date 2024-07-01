@@ -1,5 +1,5 @@
-#ifndef LIFE_H
-#define LIFE_H
+#ifndef SNAKE_H
+#define SNAKE_H
 
 #include <stdbool.h>
 
@@ -44,4 +44,4 @@ int countAliveNeighbors(ToroidalGrid *grid, int x, int y);
 /* Returns the state of cells in the next generation */
 void updateBoard(ToroidalGrid **grid);
 
-#endif /* LIFE_H */
+#endif /* SNAKE_H */

@@ -1,6 +1,6 @@
 #include <raylib.h>
 
-#include "life.h"
+#include "snake.h"
 #include "raymath.h"
 #include "rlgl.h"
 

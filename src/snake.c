@@ -1,4 +1,4 @@
-#include "life.h"
+#include "snake.h"
 
 #include <stdbool.h>
 #include <stdio.h>

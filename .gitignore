@@ -50,3 +50,17 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# CMake files
+CMakeCache.txt
+cmake_install.cmake
+CPackConfig.cmake
+_deps/
+Makefile
+obj/
+CMakeFiles/
+CPackSourceConfig.cmake 
+CMakeSettings.json
+
+# Build files
+snake

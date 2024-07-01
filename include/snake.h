@@ -1,8 +1,9 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-#include "grid.h"
 #include <stdbool.h>
+
+#include "grid.h"
 
 /* Begin typedef declarations */
 
@@ -43,6 +44,6 @@ Snake *createSnake(int x, int y, SnakeDirection direction);
 void freeSnake(Snake *snake);
 
 /* Moves the position of a snake */
-void moveSnake(Snake *snake, GameGrid* grid);
+void moveSnake(Snake *snake, GameGrid *grid);
 
 #endif /* SNAKE_H */

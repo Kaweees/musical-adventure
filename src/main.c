@@ -1,9 +1,9 @@
 #include <raylib.h>
 
+#include "grid.h"
 #include "raymath.h"
 #include "rlgl.h"
 #include "snake.h"
-#include "grid.h"
 
 #define CELL_SIZE 40
 

@@ -1,10 +1,11 @@
 #include "snake.h"
-#include "grid.h"
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include "grid.h"
 
 SnakeSegment *createSnakeSegment(int x, int y, SnakeDirection direction) {
   SnakeSegment *segment = malloc(sizeof(SnakeSegment));
@@ -19,9 +20,7 @@ SnakeSegment *createSnakeSegment(int x, int y, SnakeDirection direction) {
   return segment;
 }
 
-void freeSnakeSegment(SnakeSegment *segment) {
-  free(segment);
-}
+void freeSnakeSegment(SnakeSegment *segment) { free(segment); }
 
 Snake *createSnake(int x, int y, SnakeDirection direction) {
   Snake *snake = malloc(sizeof(Snake));
@@ -45,8 +44,8 @@ void freeSnake(Snake *snake) {
 }
 
 /* Moves the position of a snake */
-void moveSnake(Snake *snake, GameGrid* grid) {
-  SnakeSegment * temp = snake->head;
+void moveSnake(Snake *snake, GameGrid *grid) {
+  SnakeSegment *temp = snake->head;
   while (temp != NULL) {
     switch (temp->direction) {
       case (UP):

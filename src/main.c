@@ -1,8 +1,8 @@
 #include <raylib.h>
 
-#include "snake.h"
 #include "raymath.h"
 #include "rlgl.h"
+#include "snake.h"
 
 #define CELL_SIZE 60
 

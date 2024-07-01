@@ -1,47 +1,48 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
+#include "grid.h"
 #include <stdbool.h>
 
 /* Begin typedef declarations */
 
-/* Represents the types of cell states */
-typedef enum CellOptions {
-  DEAD = 0,
-  ALIVE = 1,
-} CellOptions;
+/* Represents the direction of the snake */
+typedef enum SnakeDirection {
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT,
+} SnakeDirection;
 
-/* Represents a toroidal grid */
-typedef struct ToroidalGrid {
-  int width;
-  int height;
-  CellOptions **data;
-} ToroidalGrid;
+/* Represents a segment of the snake */
+typedef struct SnakeSegment {
+  int x;
+  int y;
+  struct SnakeSegment *next;
+  SnakeDirection direction;
+} SnakeSegment;
+
+/* Represents the entire snake */
+typedef struct Snake {
+  SnakeSegment *head;
+  SnakeSegment *tail;
+} Snake;
 
 /* Begin function prototype declarations */
 
-/* Creates a toroidal grid */
-ToroidalGrid *createToroidalGrid(int width, int height);
+/* Creates a snake segment */
+SnakeSegment *createSnakeSegment(int x, int y, SnakeDirection direction);
 
-/* Frees the memory allocated for a toroidal grid */
-void freeToroidalGrid(ToroidalGrid *grid);
+/* Frees the memory allocated for a snake segment */
+void freeSnakeSegment(SnakeSegment *segment);
 
-/* Updates the toroidal grid */
-void updateToroidalGrid(ToroidalGrid *grid);
+/* Creates a snake */
+Snake *createSnake(int x, int y, SnakeDirection direction);
 
-/* Displays the toroidal grid */
-void displayToroidalGrid(ToroidalGrid *grid);
+/* Frees the memory allocated for a snake */
+void freeSnake(Snake *snake);
 
-/* Get the value at a given position in the grid */
-CellOptions getToroidalGrid(ToroidalGrid *grid, int x, int y);
-
-/* Set the value at a given position in the grid */
-void setToroidalGrid(ToroidalGrid *grid, int x, int y, CellOptions value);
-
-/* Returns the number of alive neighbors of a cell */
-int countAliveNeighbors(ToroidalGrid *grid, int x, int y);
-
-/* Returns the state of cells in the next generation */
-void updateBoard(ToroidalGrid **grid);
+/* Moves the position of a snake */
+void moveSnake(Snake *snake, GameGrid* grid);
 
 #endif /* SNAKE_H */

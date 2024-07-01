@@ -3,33 +3,26 @@
 #include "raymath.h"
 #include "rlgl.h"
 #include "snake.h"
+#include "grid.h"
 
-#define CELL_SIZE 60
+#define CELL_SIZE 40
 
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
 int main(int argc, char *argv[]) {
-  ToroidalGrid *grid = createToroidalGrid(30, 30);
+  ToroidalGrid *grid = createToroidalGrid(10, 10);
   const int screenWidth = grid->width * CELL_SIZE;
   const int screenHeight = grid->height * CELL_SIZE;
   int cellWidth = screenWidth / grid->width;
   int cellHeight = screenHeight / grid->height;
 
-  InitWindow(screenWidth, screenHeight, "Conway's Game of Life");
+  InitWindow(screenWidth, screenHeight, "Snake!");
 
   SetTargetFPS(60);  // Set our game to run at 60 frames-per-second
 
   /* Populate the grid with some initial cell states */
   setToroidalGrid(grid, 0, 1, ALIVE);
-  setToroidalGrid(grid, 1, 2, ALIVE);
-  setToroidalGrid(grid, 2, 2, ALIVE);
-  setToroidalGrid(grid, 2, 1, ALIVE);
-  setToroidalGrid(grid, 2, 0, ALIVE);
-
-  setToroidalGrid(grid, 10, 10, ALIVE);
-  setToroidalGrid(grid, 10, 9, ALIVE);
-  setToroidalGrid(grid, 10, 8, ALIVE);
 
   /* Loop until window close button or ESC key is pressed */
   while (!WindowShouldClose()) {

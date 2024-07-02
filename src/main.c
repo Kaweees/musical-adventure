@@ -1,7 +1,6 @@
 #include <raylib.h>
 #include <stddef.h>
 
-#include "life.h"
 #include "grid.h"
 #include "snake.h"
 #include "raymath.h"

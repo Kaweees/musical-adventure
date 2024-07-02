@@ -2,9 +2,9 @@
 #include <stddef.h>
 
 #include "grid.h"
-#include "snake.h"
 #include "raymath.h"
 #include "rlgl.h"
+#include "snake.h"
 
 #define CELL_SIZE 20
 
@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
   int cellHeight = screenHeight / grid->height;
 
   InitWindow(screenWidth, screenHeight, "Snake!");
-  
+
   SetTargetFPS(10);  // Set our game to run at 60 frames-per-second
 
   /* Loop until window close button or ESC key is pressed */
@@ -30,15 +30,14 @@ int main(int argc, char *argv[]) {
 
     /* Draw background */
     ClearBackground(BLACK);
-    
+
     /* Draw snake on the grid */
-    SnakeSegment * temp = snake->head;
+    SnakeSegment *temp = snake->head;
     while (temp != NULL) {
       DrawRectangle(temp->x * cellWidth, temp->y * cellHeight, cellWidth,
-      cellHeight, GREEN);
+          cellHeight, GREEN);
       temp = temp->next;
     }
-
 
     /* Draw horizontal lines */
     for (int i = 1; i < grid->height; ++i) {
@@ -52,7 +51,7 @@ int main(int argc, char *argv[]) {
 
     /* End drawing */
     EndDrawing();
-    
+
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
       snake->head->direction = UP;
     }

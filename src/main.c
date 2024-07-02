@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     BeginDrawing();
 
     /* Draw background */
-    DrawRectangle(0, 0, cellWidth * grid->height, cellHeight * grid->height, BLACK);
+    ClearBackground(BLACK);
     
     /* Draw snake on the grid */
     SnakeSegment * temp = snake->head;
@@ -52,6 +52,19 @@ int main(int argc, char *argv[]) {
 
     /* End drawing */
     EndDrawing();
+    
+    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+      snake->head->direction = UP;
+    }
+    if (IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN)) {
+      snake->head->direction = DOWN;
+    }
+    if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)) {
+      snake->head->direction = LEFT;
+    }
+    if (IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)) {
+      snake->head->direction = RIGHT;
+    }
 
     /* Update the snake */
     moveSnake(snake, grid);

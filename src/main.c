@@ -1,12 +1,13 @@
 #include <raylib.h>
-#include <stdio.h>
+#include <stddef.h>
 
+#include "life.h"
 #include "grid.h"
+#include "snake.h"
 #include "raymath.h"
 #include "rlgl.h"
-#include "snake.h"
 
-#define CELL_SIZE 40
+#define CELL_SIZE 20
 
 //------------------------------------------------------------------------------------
 // Program main entry point
@@ -20,11 +21,8 @@ int main(int argc, char *argv[]) {
   int cellHeight = screenHeight / grid->height;
 
   InitWindow(screenWidth, screenHeight, "Snake!");
-
-  SetTargetFPS(60);  // Set our game to run at 60 frames-per-second
-
-  /* Populate the grid with some initial cell states */
-  // setToroidalGrid(grid, 0, 1, ALIVE);
+  
+  SetTargetFPS(10);  // Set our game to run at 60 frames-per-second
 
   /* Loop until window close button or ESC key is pressed */
   while (!WindowShouldClose()) {
@@ -32,8 +30,16 @@ int main(int argc, char *argv[]) {
     BeginDrawing();
 
     /* Draw background */
-    DrawRectangle(
-        0, 0, cellWidth * grid->height, cellHeight * grid->height, BLACK);
+    DrawRectangle(0, 0, cellWidth * grid->height, cellHeight * grid->height, BLACK);
+    
+    /* Draw snake on the grid */
+    SnakeSegment * temp = snake->head;
+    while (temp != NULL) {
+      DrawRectangle(temp->x * cellWidth, temp->y * cellHeight, cellWidth,
+      cellHeight, GREEN);
+      temp = temp->next;
+    }
+
 
     /* Draw horizontal lines */
     for (int i = 1; i < grid->height; ++i) {
@@ -48,19 +54,8 @@ int main(int argc, char *argv[]) {
     /* End drawing */
     EndDrawing();
 
-    // SnakeSegment * temp = snake->head;
-    // while (temp != NULL) {
-    //   // DrawRectangle(temp->x * cellWidth, temp->y * cellHeight, cellWidth,
-    //   cellHeight, GREEN);
-    //   }
-    //   temp = temp->next;
-    // }
-
-    // /* End drawing */
-    // EndDrawing();
-
-    // /* Update the grid */
-    // moveSnake(snake, grid);
+    /* Update the snake */
+    moveSnake(snake, grid);
   }
 
   /* Close window and OpenGL context */

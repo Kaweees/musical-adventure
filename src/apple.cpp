@@ -2,7 +2,7 @@
 
 #include <random>
 
-Apple::Apple(GameGrid* grid) {
+Apple::Apple(GameGrid *grid) {
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<int> distr_x(0, grid->height);

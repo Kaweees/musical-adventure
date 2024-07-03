@@ -2,10 +2,9 @@
 #include <stddef.h>
 #include <stdio.h>
 
-#include "../include/snake.hpp"
-#include "../include/grid.hpp"
 #include "../include/apple.hpp"
-
+#include "../include/grid.hpp"
+#include "../include/snake.hpp"
 #include "raymath.h"
 #include "rlgl.h"
 

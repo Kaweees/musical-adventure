@@ -1,10 +1,11 @@
 #include "../include/snake.hpp"
-#include "../include/grid.hpp"
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include "../include/grid.hpp"
 
 SnakeSegment::SnakeSegment(int x, int y, SnakeDirection direction) {
   this->x = x;

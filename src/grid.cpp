@@ -11,3 +11,12 @@ GameGrid::GameGrid(int width, int height) {
 }
 
 void GameGrid::addApple() { this->apples.push_back(Apple(this)); }
+
+void GameGrid::removeApple(int x, int y) {
+  for (int i = 0; i < this->apples.size(); ++i) {
+    if (this->apples[i].x == x && this->apples[i].y == y) {
+      this->apples.erase(this->apples.begin() + i);
+      break;
+    }
+  }
+}

@@ -15,6 +15,8 @@
 //------------------------------------------------------------------------------------
 int main(int argc, char *argv[]) {
   GameGrid grid = GameGrid(10, 10);
+  grid.addApple();
+  grid.addApple();
   Snake snake = Snake(0, 0, SnakeDirection::UP);
   const int screenWidth = grid.width * CELL_SIZE;
   const int screenHeight = grid.height * CELL_SIZE;
@@ -39,6 +41,12 @@ int main(int argc, char *argv[]) {
       DrawRectangle(temp->x * cellWidth, temp->y * cellHeight, cellWidth,
           cellHeight, GREEN);
       temp = temp->next;
+    }
+
+    /* Draw apple on the grid */
+    for (Apple apple : grid.apples) {
+      DrawRectangle(apple.x * cellWidth, apple.y * cellHeight, cellWidth,
+          cellHeight, RED);
     }
 
     /* Draw horizontal lines */
@@ -69,6 +77,19 @@ int main(int argc, char *argv[]) {
 
     /* Update the snake */
     snake.moveSnake(&grid);
+
+    /* Check if the snake has eaten an apple */
+     for (Apple apple : grid.apples) {
+      if (snake.head->x == apple.x && snake.head->y == apple.y) {
+        grid.removeApple(apple.x, apple.y);
+        grid.addApple();
+        // snake.growSnake();
+      }
+    }
+
+    // for (Apple apple : grid.apples) {
+    //   printf("Apple at (%d, %d)\n", apple.x, apple.y);
+    // }
   }
 
   /* Close window and OpenGL context */

@@ -21,4 +21,7 @@ class GameGrid {
 
   // Add an apple to the game grid
   void addApple();
+
+  // Remove an apple from the game grid
+  void removeApple(int x, int y);
 };

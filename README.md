@@ -1,2 +1,6 @@
-# musical-adventure
-Snake written in C
+# snake
+Snake written in C++ 13
+
+```sh
+clear && cmake CMakeLists.txt && make && ./snake
+```

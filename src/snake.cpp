@@ -30,9 +30,8 @@ Snake::~Snake() {
 
 void Snake::moveSnake(GameGrid *grid) {
   SnakeSegment *temp = this->head;
-  SnakeDirection previousDirection = temp->direction;
   while (temp != NULL) {
-    switch (previousDirection) {
+    switch (temp->direction) {
       case (SnakeDirection::UP):
         temp->y--;
         if (temp->y < 0) {
@@ -59,7 +58,51 @@ void Snake::moveSnake(GameGrid *grid) {
         break;
     }
     // printf("x: %d, y: %d\n", temp->x, temp->y);
-    previousDirection = temp->direction;
     temp = temp->next;
   }
+}
+
+void Snake::growSnake() {
+  int previousX = this->tail->x;
+  int previousY = this->tail->y;
+  switch (this->tail->direction) {
+    case (SnakeDirection::UP):
+      previousY++;
+      break;
+    case (SnakeDirection::DOWN):
+      previousY--;
+      break;
+    case (SnakeDirection::LEFT):
+      previousX++;
+      break;
+    case (SnakeDirection::RIGHT):
+      previousX--;
+      break;
+  }
+  if (previousY < 0) {
+    previousY = 0;
+  }
+  if (previousY > 9) {
+    previousY = 9;
+  }
+  if (previousX < 0) {
+    previousX = 0;
+  }
+  if (previousX > 9) {
+    previousX = 9;
+  }
+  SnakeSegment *newSegment = new SnakeSegment(previousX, previousY, this->tail->direction);
+  this->tail->next = newSegment;
+  this->tail = newSegment;
+}
+
+bool Snake::snakeTouchingSelf() {
+  SnakeSegment *temp = this->head->next;
+  while (temp != NULL) {
+    if (temp->x == this->head->x && temp->y == this->head->y) {
+      return true;
+    }
+    temp = temp->next;
+  }
+  return false;
 }

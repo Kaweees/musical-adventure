@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
   grid.addApple();
   grid.addApple();
   Snake snake = Snake(0, 0, SnakeDirection::UP);
+  // snake.growSnake();
   const int screenWidth = grid.width * CELL_SIZE;
   const int screenHeight = grid.height * CELL_SIZE;
   int cellWidth = screenWidth / grid.width;
@@ -62,6 +63,15 @@ int main(int argc, char *argv[]) {
     /* End drawing */
     EndDrawing();
 
+    SnakeDirection previousDirection = snake.head->direction;
+    SnakeSegment *tempSnake = snake.head;
+    while (tempSnake != NULL) {
+      SnakeDirection tempDirection = tempSnake->direction;
+      tempSnake->direction = previousDirection;
+      previousDirection = tempDirection;
+      tempSnake = tempSnake->next;
+    }
+
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
       snake.head->direction = SnakeDirection::UP;
     }
@@ -83,13 +93,15 @@ int main(int argc, char *argv[]) {
       if (snake.head->x == apple.x && snake.head->y == apple.y) {
         grid.removeApple(apple.x, apple.y);
         grid.addApple();
-        // snake.growSnake();
+        snake.growSnake();
       }
     }
 
-    // for (Apple apple : grid.apples) {
-    //   printf("Apple at (%d, %d)\n", apple.x, apple.y);
-    // }
+    /* Check if the snake has touched itself */
+    if (snake.snakeTouchingSelf()) {
+      printf("Game Over!\n");
+      break;
+    }
   }
 
   /* Close window and OpenGL context */

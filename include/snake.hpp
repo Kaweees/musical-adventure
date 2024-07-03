@@ -38,5 +38,10 @@ class Snake {
   // The tail of the snake
   SnakeSegment *tail;
 
+  // Move the snake
   void moveSnake(GameGrid *grid);
+  // Grow the snake
+  void growSnake();
+  // Check if the snake is touching itself
+  bool snakeTouchingSelf();
 };

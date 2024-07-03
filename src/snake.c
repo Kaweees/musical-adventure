@@ -46,33 +46,36 @@ void freeSnake(Snake *snake) {
 /* Moves the position of a snake */
 void moveSnake(Snake *snake, GameGrid *grid) {
   SnakeSegment *temp = snake->head;
+  SnakeDirection previousDirection = temp->direction;
   while (temp != NULL) {
-    switch (temp->direction) {
+    switch (previousDirection) {
       case (UP):
         temp->y--;
         if (temp->y < 0) {
-          temp->y = grid->height;
+          temp->y = grid->height - 1;
         }
         break;
       case (DOWN):
         temp->y++;
-        if (temp->y > grid->height) {
+        if (temp->y > grid->height - 1) {
           temp->y = 0;
         }
         break;
       case (LEFT):
         temp->x--;
         if (temp->x < 0) {
-          temp->x = grid->width;
+          temp->x = grid->width - 1;
         }
         break;
       case (RIGHT):
         temp->x++;
-        if (temp->x > grid->width) {
+        if (temp->x > grid->width - 1) {
           temp->x = 0;
         }
         break;
     }
+    // printf("x: %d, y: %d\n", temp->x, temp->y);
+    previousDirection = temp->direction;
     temp = temp->next;
   }
 }

@@ -1,5 +1,8 @@
 #include <raylib.h>
 #include <stddef.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "grid.h"
 #include "raymath.h"
@@ -12,6 +15,7 @@
 // Program main entry point
 //------------------------------------------------------------------------------------
 int main(int argc, char *argv[]) {
+  srand(time(NULL)); // Seed the RNG with current time
   GameGrid *grid = createGameGrid(10, 10);
   Snake *snake = createSnake(0, 0, UP);
   const int screenWidth = grid->width * CELL_SIZE;
@@ -65,12 +69,17 @@ int main(int argc, char *argv[]) {
       snake->head->direction = RIGHT;
     }
 
+    /* Generate a random coordinate for apple */
+    int random_x = rand() % (grid->height + 1);
+    int random_y = rand() % (grid->width + 1);
+
     /* Update the snake */
     moveSnake(snake, grid);
   }
 
   /* Close window and OpenGL context */
   CloseWindow();
+
   /* De-allocate memory */
   freeGameGrid(grid);
   freeSnake(snake);

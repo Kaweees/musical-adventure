@@ -91,7 +91,8 @@ void Snake::growSnake() {
   if (previousX > 9) {
     previousX = 9;
   }
-  SnakeSegment *newSegment = new SnakeSegment(previousX, previousY, this->tail->direction);
+  SnakeSegment *newSegment =
+      new SnakeSegment(previousX, previousY, this->tail->direction);
   this->tail->next = newSegment;
   this->tail = newSegment;
 }

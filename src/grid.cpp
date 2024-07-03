@@ -1,11 +1,14 @@
 #include "../include/grid.hpp"
+#include "../include/apple.hpp"
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include <vector>
 
 GameGrid::GameGrid(int width, int height) {
   this->width = width;
   this->height = height;
+  this->apples = std::vector<Apple>();
+}
+
+void GameGrid::addApple() {
+  this->apples.push_back(Apple(this));
 }

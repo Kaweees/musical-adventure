@@ -1,6 +1,8 @@
 #pragma once
 
-#include <stdbool.h>
+#include <vector>
+
+class Apple; // Forward declaration
 
 class GameGrid {
   public:
@@ -14,4 +16,9 @@ class GameGrid {
   int width;
   // The height of the game grid
   int height;
+  // The apple on the game grid
+  std::vector<Apple> apples;
+
+  // Add an apple to the game grid
+  void addApple();
 };

@@ -1,7 +1,8 @@
 #include "../include/grid.hpp"
-#include "../include/apple.hpp"
 
 #include <vector>
+
+#include "../include/apple.hpp"
 
 GameGrid::GameGrid(int width, int height) {
   this->width = width;
@@ -9,6 +10,4 @@ GameGrid::GameGrid(int width, int height) {
   this->apples = std::vector<Apple>();
 }
 
-void GameGrid::addApple() {
-  this->apples.push_back(Apple(this));
-}
+void GameGrid::addApple() { this->apples.push_back(Apple(this)); }

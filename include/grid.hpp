@@ -2,7 +2,7 @@
 
 #include <vector>
 
-class Apple; // Forward declaration
+class Apple;  // Forward declaration
 
 class GameGrid {
   public:

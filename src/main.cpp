@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
     snake.moveSnake(&grid);
 
     /* Check if the snake has eaten an apple */
-     for (Apple apple : grid.apples) {
+    for (Apple apple : grid.apples) {
       if (snake.head->x == apple.x && snake.head->y == apple.y) {
         grid.removeApple(apple.x, apple.y);
         grid.addApple();

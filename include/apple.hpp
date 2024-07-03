@@ -11,8 +11,8 @@ class Apple {
     // Constructor to initialize memory
     Apple(GameGrid* grid);
 
-    // Frees the memory allocated
-    ~Apple();
+    // Destructor to free the memory allocated
+    ~Apple() = default;
 
     // The x-coordinate of the apple
     int x;

@@ -49,27 +49,27 @@ void moveSnake(Snake *snake, GameGrid *grid) {
   while (temp != NULL) {
     switch (temp->direction) {
       case (UP):
+        temp->y--;
+        if (temp->y < 0) {
+          temp->y = grid->height;
+        }
+        break;
+      case (DOWN):
         temp->y++;
         if (temp->y > grid->height) {
           temp->y = 0;
         }
         break;
-      case (DOWN):
-        temp->y--;
-        if (temp->y < grid->height) {
-          temp->y = grid->height;
-        }
-        break;
       case (LEFT):
-        temp->x++;
-        if (temp->x > grid->width) {
-          temp->x = 0;
+        temp->x--;
+        if (temp->x < 0) {
+          temp->x = grid->width;
         }
         break;
       case (RIGHT):
-        temp->x--;
-        if (temp->x < grid->width) {
-          temp->x = grid->width;
+        temp->x++;
+        if (temp->x > grid->width) {
+          temp->x = 0;
         }
         break;
     }

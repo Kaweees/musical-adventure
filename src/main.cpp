@@ -72,16 +72,16 @@ int main(int argc, char *argv[]) {
       tempSnake = tempSnake->next;
     }
 
-    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && (snake.head->direction != SnakeDirection::DOWN)) {
       snake.head->direction = SnakeDirection::UP;
     }
-    if (IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN)) {
+    if ((IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN)) && (snake.head->direction != SnakeDirection::UP)) {
       snake.head->direction = SnakeDirection::DOWN;
     }
-    if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)) {
+    if ((IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)) && (snake.head->direction != SnakeDirection::RIGHT)) {
       snake.head->direction = SnakeDirection::LEFT;
     }
-    if (IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)) {
+    if ((IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)) && (snake.head->direction != SnakeDirection::LEFT)) {
       snake.head->direction = SnakeDirection::RIGHT;
     }
 
